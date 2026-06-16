@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Set theme before first paint to avoid a flash of the wrong color scheme -->
+<script>
+  (function () {
+    try {
+      var s = localStorage.getItem('pf-theme');
+      if (!s) s = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', s);
+    } catch (e) {}
+  })();
+</script>
+
+<title>Serhii Ocheretenko — Full-Stack Developer (NestJS, Next.js, GCP)</title>
+<meta name="description" content="Serhii Ocheretenko — full-stack developer in Kyiv building production systems with NestJS, Next.js, PostgreSQL and Google Cloud. Selected work, experience and contact." />
+<meta name="author" content="Serhii Ocheretenko" />
+<meta name="keywords" content="Serhii Ocheretenko, Ocheretenko, full-stack developer, software engineer, NestJS, Next.js, React, PostgreSQL, Node.js, Google Cloud, Kyiv developer" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://ocheretenko.com/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Serhii Ocheretenko" />
+<meta property="og:title" content="Serhii Ocheretenko — Full-Stack Developer" />
+<meta property="og:description" content="Full-stack developer in Kyiv building production systems with NestJS, Next.js, PostgreSQL and Google Cloud." />
+<meta property="og:url" content="https://ocheretenko.com/" />
+<meta property="og:image" content="https://ocheretenko.com/favicon/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Serhii Ocheretenko — Full-Stack Developer" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Serhii Ocheretenko — Full-Stack Developer" />
+<meta name="twitter:description" content="Full-stack developer in Kyiv building production systems with NestJS, Next.js, PostgreSQL and Google Cloud." />
+<meta name="twitter:image" content="https://ocheretenko.com/favicon/og-image.png" />
+
+<meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0d0d0b" media="(prefers-color-scheme: dark)" />
+
+<!-- Structured data: helps Google associate the site with your name -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Serhii Ocheretenko",
+  "url": "https://ocheretenko.com/",
+  "image": "https://ocheretenko.com/favicon/og-image.png",
+  "jobTitle": "Full-Stack Developer",
+  "email": "mailto:ocheretenko.s@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Kyiv", "addressCountry": "UA" },
+  "knowsAbout": ["NestJS", "Next.js", "React", "Node.js", "PostgreSQL", "Google Cloud", "System Design"],
+  "worksFor": { "@type": "Organization", "name": "SKELAR" },
+  "sameAs": [
+    "https://github.com/socheretenko",
+    "https://www.linkedin.com/in/socheretenko/",
+    "https://t.me/socheretenko"
+  ]
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon-180.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Fonts: preconnect + non-render-blocking load (display=swap keeps text visible) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" /></noscript>
+<style>
+  :root {
+    --bg: #fbfbf9;
+    --surface: #f3f2ee;
+    --fg: #1a1a17;
+    --muted: #6c6b63;
+    --faint: #98968c;
+    --line: #e4e2db;
+    --line-strong: #d4d2c9;
+    --accent: #c2552e;
+    --accent-soft: rgba(26,26,23,0.06);
+
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --maxw: 660px;
+    --gap-section: 132px;
+    --pad-x: 32px;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html[data-theme="dark"] {
+    --bg: #0d0d0b;
+    --surface: #171714;
+    --fg: #e9e8e2;
+    --muted: #8f8e85;
+    --faint: #66655d;
+    --line: #232320;
+    --line-strong: #34332e;
+    --accent: #c2552e;
+    --accent-soft: rgba(233,232,226,0.07);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; scroll-padding-top: 88px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    transition: background 0.5s var(--ease), color 0.5s var(--ease);
+  }
+  ::selection { background: var(--fg); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
+  .theme-btn:focus-visible { outline-offset: 3px; }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    font-weight: 400;
+  }
+
+  /* ---------- layout ---------- */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad-x); }
+
+  /* ---------- top bar ---------- */
+  header.top {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(1.2) blur(10px);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s var(--ease), background 0.5s var(--ease);
+  }
+  header.top.scrolled { border-bottom-color: var(--line); }
+  .top-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 18px var(--pad-x);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 11px; font-weight: 500; letter-spacing: -0.01em; white-space: nowrap; }
+  .brand .dot {
+    width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+    position: relative;
+  }
+  .brand .dot::after {
+    content: ""; position: absolute; inset: -4px; border-radius: 50%;
+    border: 1px solid var(--accent); opacity: 0.35;
+    animation: pulse 2.6s var(--ease) infinite;
+  }
+  @keyframes pulse { 0%{transform:scale(0.7);opacity:.5} 70%{transform:scale(1.5);opacity:0} 100%{opacity:0} }
+  nav.links { display: flex; align-items: center; gap: 22px; }
+  nav.links a {
+    font-size: 14px; color: var(--muted); position: relative; padding: 2px 0;
+    transition: color 0.25s var(--ease);
+  }
+  nav.links a::after {
+    content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%;
+    background: var(--fg); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s var(--ease);
+  }
+  nav.links a:hover { color: var(--fg); }
+  nav.links a:hover::after { transform: scaleX(1); }
+  @media (max-width: 600px) { nav.links .nav-hide { display: none; } }
+
+  .theme-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid var(--line-strong); background: transparent; color: var(--fg);
+    display: grid; place-items: center; cursor: pointer; padding: 0;
+    transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.4s var(--ease);
+  }
+  .theme-btn:hover { background: var(--accent-soft); transform: rotate(18deg); }
+  .theme-btn svg { width: 16px; height: 16px; }
+  html[data-theme="light"] .theme-btn .i-moon { display: block; }
+  html[data-theme="light"] .theme-btn .i-sun { display: none; }
+  html[data-theme="dark"] .theme-btn .i-moon { display: none; }
+  html[data-theme="dark"] .theme-btn .i-sun { display: block; }
+
+  /* ---------- reveal animation ----------
+     Content is visible by default. The hidden-then-reveal entrance is only
+     enabled (html.motion) once JS confirms the animation clock advances —
+     so throttled/background contexts never trap content at opacity:0. */
+  .reveal { opacity: 1; transform: none; }
+  html.motion .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  html.motion .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .brand .dot::after, .hero .kicker .avail::after { animation: none; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero { padding-top: 116px; }
+  .hero .kicker { display: inline-flex; align-items: center; gap: 10px; }
+  .hero .kicker .avail { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); position: relative; }
+  .hero .kicker .avail::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 1px solid var(--accent); opacity: 0.4; animation: pulse 2.6s var(--ease) infinite; }
+  .hero-line {
+    font-family: var(--serif); font-weight: 300; font-style: normal;
+    font-size: clamp(2.1rem, 6.2vw, 3.35rem); line-height: 1.12; letter-spacing: -0.015em;
+    margin: 26px 0 0; text-wrap: balance;
+  }
+  .hero-line em { font-style: italic; color: var(--accent); }
+  .hero-sub { margin: 26px 0 0; color: var(--muted); font-size: 18px; max-width: 50ch; text-wrap: pretty; }
+  .hero-sub a { color: var(--fg); border-bottom: 1px solid var(--line-strong); transition: border-color .25s; }
+  .hero-sub a:hover { border-color: var(--fg); }
+
+  /* ---------- section scaffolding ---------- */
+  section.block { margin-top: var(--gap-section); }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 38px; }
+  .sec-head .serif-h { font-family: var(--serif); font-weight: 400; font-size: 1.95rem; letter-spacing: -0.015em; margin: 0; }
+  .sec-head .idx { font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: 0.1em; }
+
+  /* about */
+  .about p { margin: 0 0 18px; font-size: 18px; color: var(--fg); max-width: 56ch; text-wrap: pretty; }
+  .about p:last-child { margin-bottom: 0; }
+  .about .muted { color: var(--muted); }
+
+  /* projects */
+  .proj-list { display: flex; flex-direction: column; }
+  .proj {
+    display: grid; grid-template-columns: 1fr auto; gap: 4px 20px; align-items: baseline;
+    padding: 24px 4px; border-top: 1px solid var(--line);
+    position: relative; transition: padding-left 0.35s var(--ease);
+  }
+  .proj:last-child { border-bottom: 1px solid var(--line); }
+  .proj::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+    background: var(--accent-soft); z-index: -1; transition: width 0.4s var(--ease);
+    margin: 0 -12px; border-radius: 4px;
+  }
+  .proj:hover { padding-left: 16px; }
+  .proj-name { font-size: 1.18rem; font-weight: 500; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 9px; }
+  .proj-name .arrow { opacity: 0; transform: translateX(-6px); transition: opacity .35s var(--ease), transform .35s var(--ease); font-family: var(--mono); color: var(--muted); }
+  .proj:hover .proj-name .arrow { opacity: 1; transform: none; }
+  .proj-year { font-family: var(--mono); font-size: 13px; color: var(--faint); }
+  .proj-desc { grid-column: 1 / -1; color: var(--muted); font-size: 15.5px; margin-top: 4px; max-width: 54ch; text-wrap: pretty; }
+  .proj-tags { grid-column: 1 / -1; display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--faint); border: 1px solid var(--line); padding: 3px 9px; border-radius: 100px; }
+
+  /* experience timeline */
+  .xp { display: flex; flex-direction: column; }
+  .xp-row {
+    display: grid; grid-template-columns: 128px 1fr; gap: 8px 24px; padding: 20px 0;
+    border-top: 1px solid var(--line); align-items: baseline;
+  }
+  .xp-row:last-child { border-bottom: 1px solid var(--line); }
+  .xp-when { font-family: var(--mono); font-size: 12.5px; color: var(--faint); letter-spacing: 0.02em; padding-top: 3px; }
+  .xp-role { font-size: 1.02rem; font-weight: 500; letter-spacing: -0.005em; }
+  .xp-co { color: var(--muted); }
+  .xp-note { display: block; color: var(--muted); font-size: 14.5px; margin-top: 5px; max-width: 50ch; text-wrap: pretty; }
+  @media (max-width: 540px){ .xp-row { grid-template-columns: 1fr; } .xp-when { padding-top: 0; } }
+
+  /* contact */
+  .contact-sub { color: var(--muted); font-size: 17px; max-width: 52ch; margin: 0 0 30px; text-wrap: pretty; }
+  .social { display: flex; flex-wrap: wrap; gap: 10px; }
+  .social a {
+    display: inline-flex; align-items: center; gap: 9px;
+    border: 1px solid var(--line-strong); border-radius: 100px; padding: 10px 17px;
+    font-size: 14.5px; color: var(--fg);
+    transition: background .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+  }
+  .social a:hover { background: var(--accent-soft); border-color: var(--fg); transform: translateY(-2px); }
+  .social a svg { width: 15px; height: 15px; }
+  .social a .ext { font-family: var(--mono); font-size: 11px; color: var(--faint); }
+
+  /* footer */
+  footer.foot { margin-top: 120px; padding: 40px 0 64px; border-top: 1px solid var(--line); }
+  .foot-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .foot-inner span { font-size: 13px; color: var(--faint); font-family: var(--mono); letter-spacing: 0.02em; }
+  .to-top { font-size: 13px; color: var(--muted); cursor: pointer; background: none; border: none; font-family: var(--mono); letter-spacing: .04em; transition: color .25s; }
+  .to-top:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+  <header class="top" id="top">
+    <div class="top-inner">
+      <a href="#top" class="brand"><span class="dot"></span><span>Serhii Ocheretenko</span></a>
+      <nav class="links">
+        <a href="#work" class="nav-hide">Work</a>
+        <a href="#experience" class="nav-hide">Experience</a>
+        <a href="#contact" class="nav-hide">Contact</a>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <span class="kicker reveal"><span class="avail"></span>Full-Stack Developer · Kyiv</span>
+      <h1 class="hero-line serif-h reveal" id="heroLine">Serhii Ocheretenko — a full-stack developer who takes products from <em>zero to one</em>: backend, frontend, databases, and the infrastructure that ships them.</h1>
+      <p class="hero-sub reveal">I build end to end: schema to UI, first commit to production. Happiest owning the whole path from a rough idea to something real people use.</p>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="block about" id="about">
+      <div class="sec-head reveal"><h2 class="serif-h">About</h2><span class="idx">01</span></div>
+      <p class="reveal">I started out teaching math and physics, then followed the part I liked most — building the systems behind the classroom — into engineering full time. Today I work full-stack and lead the martech function at SKELAR.</p>
+      <p class="reveal muted">Most of my work is zero-to-one: standing up whole products end to end — backend and frontend, payment infrastructure, internal tooling, and the marketing funnels around them — built to hold up under millions of users. I care about pragmatic architecture and systems a small team can actually reason about.</p>
+      <p class="reveal muted">I've led teams more than once — math and physics teachers at Unext, an engineering team at CML, and now back-office strategy at SKELAR — usually by being the person willing to own the whole problem.</p>
+    </section>
+
+    <!-- WORK -->
+    <section class="block" id="work">
+      <div class="sec-head reveal"><h2 class="serif-h">Selected work</h2><span class="idx">02</span></div>
+      <div class="proj-list">
+        <a class="proj reveal" href="https://spiriohub.com" target="_blank" rel="noopener">
+          <span class="proj-name">Spirio <span class="arrow">↗</span></span>
+          <span class="proj-year">2024 — Now</span>
+          <span class="proj-desc">A digital wellbeing platform rooted in Eastern philosophy and practice — guided courses, audio sessions, and daily rituals that help people quiet the noise and reconnect with themselves.</span>
+          <span class="proj-tags"><span class="tag">NestJS</span><span class="tag">Next.js</span><span class="tag">PostgreSQL</span><span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">Payments</span></span>
+        </a>
+        <a class="proj reveal" href="https://www.miactivo.com/" target="_blank" rel="noopener">
+          <span class="proj-name">Miactivo <span class="arrow">↗</span></span>
+          <span class="proj-year">2024</span>
+          <span class="proj-desc">A blockchain-based real estate platform that tokenizes property, letting people invest from accessible amounts and earn monthly or annual returns from rent and asset-backed instruments — all legally backed and transparent.</span>
+          <span class="proj-tags"><span class="tag">NestJS</span><span class="tag">React</span><span class="tag">Blockchain</span><span class="tag">Tokenization</span><span class="tag">MySQL</span></span>
+        </a>
+        <a class="proj reveal" href="https://goodszilla.ca/" target="_blank" rel="noopener">
+          <span class="proj-name">Goodszilla <span class="arrow">↗</span></span>
+          <span class="proj-year">2023</span>
+          <span class="proj-desc">A philanthropic fintech layer for commerce that embeds charitable giving directly into checkout — across online stores and in-store POS terminals alike — so shoppers can donate to the causes they care about at the moment of purchase.</span>
+          <span class="proj-tags"><span class="tag">Node.js</span><span class="tag">React</span><span class="tag">FinTech</span><span class="tag">POS</span><span class="tag">PayPal</span></span>
+        </a>
+        <a class="proj reveal" href="https://blocksport.io/" target="_blank" rel="noopener">
+          <span class="proj-name">Blocksport <span class="arrow">↗</span></span>
+          <span class="proj-year">2023</span>
+          <span class="proj-desc">A blockchain-powered SaaS platform for the sports industry — fan tokens, NFT marketplaces, and white-label fan apps that help clubs engage and monetize their global fanbase.</span>
+          <span class="proj-tags"><span class="tag">Solidity</span><span class="tag">Web3</span><span class="tag">Blockchain</span><span class="tag">Node.js</span><span class="tag">React</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="block" id="experience">
+      <div class="sec-head reveal"><h2 class="serif-h">Experience</h2><span class="idx">03</span></div>
+      <div class="xp">
+        <div class="xp-row reveal">
+          <span class="xp-when">2024 — Now</span>
+          <span><span class="xp-role">MarTech Lead</span> <span class="xp-co">· SKELAR</span><span class="xp-note">Joined to stand up the tech function from scratch and grew into owning back-office strategy. Built internal back-office tooling and automations alongside external marketing funnels serving millions of users, set up the payment infrastructure, and shipped product backends from zero. Promoted from Full-Stack Developer to MarTech Lead.</span></span>
+        </div>
+        <div class="xp-row reveal">
+          <span class="xp-when">2022 — 2024</span>
+          <span><span class="xp-role">Full-Stack Developer & Team Lead</span> <span class="xp-co">· CML Team</span><span class="xp-note">Delivered 10+ products for international clients, often as the sole point of contact with no project manager in between. Grew into a team lead role, owning delivery end to end and mentoring other engineers.</span></span>
+        </div>
+        <div class="xp-row reveal">
+          <span class="xp-when">2021 — 2022</span>
+          <span><span class="xp-role">Backend Developer & Teaching Lead</span> <span class="xp-co">· Unext</span><span class="xp-note">Built a system from the ground up that automated communication between the sales and education teams. Led the math and physics teaching group while developing on the Node.js backend.</span></span>
+        </div>
+        <div class="xp-row reveal">
+          <span class="xp-when">2020 — 2021</span>
+          <span><span class="xp-role">Mathematics Teacher</span> <span class="xp-co">· First Ukrainian Online Math School</span><span class="xp-note">Taught mathematics at Ukraine's first online math school — where the teaching and engineering threads of my career first came together.</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="block contact" id="contact">
+      <div class="sec-head reveal"><h2 class="serif-h">Contact</h2><span class="idx">04</span></div>
+      <p class="contact-sub reveal">Email or Telegram is the best way to reach me. Always happy to talk engineering, systems design, or whatever you're working on.</p>
+      <div class="social reveal">
+        <a href="mailto:ocheretenko.s@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>ocheretenko.s@gmail.com</a>
+        <a href="https://t.me/socheretenko" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.3 18.7 19.6c-.24 1.08-.88 1.35-1.78.84l-4.92-3.63-2.37 2.28c-.26.26-.48.48-.99.48l.35-5.02 9.13-8.25c.4-.35-.09-.55-.62-.2L6.2 13.04l-4.86-1.52c-1.06-.33-1.08-1.06.22-1.57l19-7.32c.88-.32 1.65.2 1.38 1.69z"/></svg>Telegram <span class="ext">↗</span></a>
+        <a href="https://github.com/socheretenko" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub <span class="ext">↗</span></a>
+        <a href="https://www.linkedin.com/in/socheretenko/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H17.6v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>LinkedIn <span class="ext">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <span>© 2026 Serhii Ocheretenko · Kyiv</span>
+      <button class="to-top" id="toTop">Back to top ↑</button>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- theme toggle ----------
+    (function () {
+      var root = document.documentElement;
+      window.applyTheme = function (mode) {
+        root.setAttribute('data-theme', mode);
+        try { localStorage.setItem('pf-theme', mode); } catch (e) {}
+      };
+      document.getElementById('themeBtn').addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        window.applyTheme(next);
+      });
+    })();
+
+    // ---------- sticky header border ----------
+    (function () {
+      var top = document.getElementById('top');
+      var onScroll = function () { top.classList.toggle('scrolled', window.scrollY > 8); };
+      onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // ---------- back to top ----------
+    document.getElementById('toTop').addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ---------- reveal on scroll ----------
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return; // content already visible by default
+
+      var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+      function show(el) {
+        if (el.classList.contains('in')) return;
+        var sibs = Array.prototype.slice.call(el.parentElement.querySelectorAll('.reveal'));
+        var idx = sibs.indexOf(el);
+        el.style.transitionDelay = (Math.max(0, idx) * 55) + 'ms';
+        el.classList.add('in');
+      }
+      function revealInView() {
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        els.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < vh * 0.92 && r.bottom > 0) show(el);
+        });
+      }
+      function enableReveal() {
+        document.documentElement.classList.add('motion');
+        revealInView();
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting) { show(en.target); io.unobserve(en.target); }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+          els.forEach(function (e) { io.observe(e); });
+        }
+        window.addEventListener('scroll', revealInView, { passive: true });
+        setTimeout(function () { els.forEach(show); }, 2400);
+      }
+
+      // Probe: only enable the hidden->reveal entrance if the animation clock
+      // actually advances. Otherwise leave everything visible.
+      if (!document.body || !document.body.animate) { return; }
+      var probe = document.createElement('div');
+      probe.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';
+      document.body.appendChild(probe);
+      var anim = probe.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600 });
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var live = (anim.currentTime || 0) > 0;
+          anim.cancel(); probe.remove();
+          if (live) enableReveal();
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
