@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="S">
-  
   <defs>
     <clipPath id="clip"><rect width="512" height="512" rx="116" ry="116"></rect></clipPath>
   </defs>
-  <rect class="tile" width="512" height="512" rx="116" ry="116"></rect>
+  <rect id="tile" fill="#1a1a17" width="512" height="512" rx="116" ry="116"></rect>
   <g clip-path="url(#clip)">
-    <text class="glyph" x="256" y="392" text-anchor="middle" font-family="Georgia, &#39;Times New Roman&#39;, serif" font-style="italic" font-weight="400" font-size="620">S</text>
+    <text id="glyph" fill="#fbfbf9" x="256" y="392" text-anchor="middle" font-family="Georgia, &#39;Times New Roman&#39;, serif" font-style="italic" font-weight="400" font-size="620">S</text>
   </g>
+  
 </svg>
